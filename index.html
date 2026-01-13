@@ -13,13 +13,14 @@ body{
   align-items:center;
   height:100vh;
   overflow:hidden;
+  font-family:Arial;
 }
 
 .book{
   width:360px;
   height:640px;
+  perspective:1500px;
   position:relative;
-  perspective:2000px;
 }
 
 .page{
@@ -28,9 +29,10 @@ body{
   position:absolute;
   top:0;
   left:0;
-  transform-origin:left;
-  transition:transform 1s;
   background:black;
+  transform-origin:left;
+  transition:transform 0.8s ease;
+  backface-visibility:hidden;   /* 🔴 REQUIRED */
 }
 
 .page img{
@@ -39,57 +41,58 @@ body{
   object-fit:cover;
 }
 
-input{
-  display:none;
+.controls{
+  position:fixed;
+  bottom:20px;
+  display:flex;
+  gap:20px;
 }
 
-#p1:checked ~ .page1{transform:rotateY(-180deg);}
-#p2:checked ~ .page2{transform:rotateY(-180deg);}
-#p3:checked ~ .page3{transform:rotateY(-180deg);}
-
-label{
-  position:absolute;
-  top:0;
-  width:50%;
-  height:100%;
-  cursor:pointer;
-  z-index:10;
+button{
+  padding:10px 20px;
+  font-size:16px;
 }
-
-.next{right:0;}
-.prev{left:0;}
 </style>
 </head>
 
 <body>
 
 <div class="book">
-
-<input type="checkbox" id="p1">
-<input type="checkbox" id="p2">
-<input type="checkbox" id="p3">
-
-<div class="page page4">
-  <img src="images/page4.jpg">
+  <div class="page" id="page1" style="z-index:4"><img src="images/page1.jpg"></div>
+  <div class="page" id="page2" style="z-index:3"><img src="images/page2.jpg"></div>
+  <div class="page" id="page3" style="z-index:2"><img src="images/page3.jpg"></div>
+  <div class="page" id="page4" style="z-index:1"><img src="images/page4.jpg"></div>
 </div>
 
-<div class="page page3">
-  <img src="images/page3.jpg">
-  <label for="p3" class="prev"></label>
+<div class="controls">
+  <button onclick="prev()">⬅ Back</button>
+  <button onclick="next()">Next ➡</button>
 </div>
 
-<div class="page page2">
-  <img src="images/page2.jpg">
-  <label for="p2" class="prev"></label>
-  <label for="p3" class="next"></label>
-</div>
+<script>
+let current = 1;
 
-<div class="page page1">
-  <img src="images/page1.jpg">
-  <label for="p1" class="next"></label>
-</div>
+function update(){
+  for(let i=1;i<=4;i++){
+    document.getElementById("page"+i).style.transform =
+      i < current ? "rotateY(-180deg)" : "rotateY(0deg)";
+  }
+}
 
-</div>
+function next(){
+  if(current < 4){
+    current++;
+    update();
+  }
+}
+
+function prev(){
+  if(current > 1){
+    current--;
+    update();
+  }
+}
+</script>
 
 </body>
 </html>
