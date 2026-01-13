@@ -1,0 +1,61 @@
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RIAN always</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Turn.js hosted online (no local file needed) -->
+  <script src="https://cdn.jsdelivr.net/npm/turn.js@4/turn.min.js"></script>
+
+  <style>
+    body {
+      background: #f5f2ee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #book {
+      width: 360px;
+      height: 640px;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="book">
+  <div class="page"><img src="images/page1.jpg"></div>
+  <div class="page"><img src="images/page2.jpg"></div>
+  <div class="page"><img src="images/page3.jpg"></div>
+  <div class="page"><img src="images/page4.jpg"></div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $("#book").turn({
+    width: 360,
+    height: 640,
+    autoCenter: true
+  });
+});
+</script>
+
+</body>
+</html>
