@@ -1,41 +1,42 @@
-
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>RIAN always</title>
+<meta charset="UTF-8">
+<title>RIAN Always</title>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Turn.js hosted online (no local file needed) -->
-  <script src="https://cdn.jsdelivr.net/npm/turn.js@4/turn.min.js"></script>
+<!-- Turn.js -->
+<script src="https://cdn.jsdelivr.net/gh/blasten/turn.js/turn.min.js"></script>
 
-  <style>
-    body {
-      background: #f5f2ee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+<style>
+body {
+  margin: 0;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;   /* ❗ stops scrolling */
+}
 
-    #book {
-      width: 360px;
-      height: 640px;
-    }
+#book {
+  width: 360px;
+  height: 640px;
+}
 
-    .page {
-      width: 100%;
-      height: 100%;
-    }
+.page {
+  width: 360px;
+  height: 640px;
+}
 
-    .page img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
+.page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
 </head>
 
 <body>
@@ -48,12 +49,10 @@
 </div>
 
 <script>
-$(document).ready(function() {
-  $("#book").turn({
-    width: 360,
-    height: 640,
-    autoCenter: true
-  });
+$("#book").turn({
+  width: 360,
+  height: 640,
+  autoCenter: true
 });
 </script>
 
