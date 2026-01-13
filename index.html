@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <title>RIAN Always</title>
 
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Turn.js -->
 <script src="https://cdn.jsdelivr.net/gh/blasten/turn.js/turn.min.js"></script>
 
 <style>
@@ -18,17 +15,19 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;   /* ❗ stops scrolling */
+  overflow: hidden;
 }
 
 #book {
   width: 360px;
   height: 640px;
+  position: relative;   /* 🔴 REQUIRED */
 }
 
 .page {
   width: 360px;
   height: 640px;
+  position: absolute;   /* 🔴 REQUIRED */
 }
 
 .page img {
@@ -49,10 +48,12 @@ body {
 </div>
 
 <script>
-$("#book").turn({
-  width: 360,
-  height: 640,
-  autoCenter: true
+$(document).ready(function() {
+  $("#book").turn({
+    width: 360,
+    height: 640,
+    autoCenter: true
+  });
 });
 </script>
 
