@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>RIAN Always</title>
-
 <style>
 body{
   margin:0;
@@ -14,6 +13,7 @@ body{
   height:100vh;
   overflow:hidden;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position:relative;
 }
 
 .book{
@@ -23,6 +23,13 @@ body{
   position:relative;
   border-radius:15px;
   box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  overflow:hidden;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow{
+  0% { box-shadow:0 10px 25px rgba(255,182,193,0.3); }
+  100% { box-shadow:0 15px 30px rgba(255,182,193,0.6); }
 }
 
 .page{
@@ -44,10 +51,40 @@ body{
   height:100%;
   object-fit:cover;
 }
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:red;
+  transform:rotate(45deg);
+  animation: float 6s linear infinite;
+  pointer-events:none;
+}
+.heart:before, .heart:after{
+  content:'';
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:red;
+  border-radius:50%;
+}
+.heart:before{ top:-10px; left:0; }
+.heart:after{ left:10px; top:0; }
+
+@keyframes float{
+  0% { transform:translateY(0) rotate(45deg); opacity:1; }
+  100% { transform:translateY(-600px) rotate(45deg); opacity:0; }
+}
 </style>
 </head>
-
 <body>
+
+<!-- Optional background music -->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <div class="book">
   <div class="page" id="page1" style="z-index:8"><img src="images/page1.jpg"></div>
@@ -71,24 +108,28 @@ function update(){
   }
 }
 
-// Tap anywhere to flip forward
+// Tap to flip
 document.querySelector('.book').addEventListener('click', () => {
   if(current < total){
     current++;
   } else {
-    current = 1; // restart after last page
+    current = 1;
   }
   update();
 });
 
-// Optional: right-click flip backward
-document.querySelector('.book').addEventListener('contextmenu', (e)=>{
-  e.preventDefault();
-  if(current > 1){
-    current--;
-    update();
-  }
-});
+// Floating hearts generation
+function createHeart(){
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random()*360 + 'px';
+  heart.style.width = heart.style.height = 10 + Math.random()*20 + 'px';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+
+// Generate hearts every 300ms
+setInterval(createHeart,300);
 </script>
 
 </body>
