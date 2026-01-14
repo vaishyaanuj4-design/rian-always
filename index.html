@@ -7,13 +7,13 @@
 <style>
 body{
   margin:0;
-  background:#111;
+  background:#f5f0f0;
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
   overflow:hidden;
-  font-family:Arial;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .book{
@@ -21,6 +21,8 @@ body{
   height:640px;
   perspective:1500px;
   position:relative;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
 }
 
 .page{
@@ -29,10 +31,11 @@ body{
   position:absolute;
   top:0;
   left:0;
-  background:black;
   transform-origin:left;
   transition:transform 0.8s ease;
-  backface-visibility:hidden;   /* 🔴 REQUIRED */
+  backface-visibility:hidden;
+  border-radius:15px;
+  overflow:hidden;
 }
 
 .page img{
@@ -51,6 +54,14 @@ body{
 button{
   padding:10px 20px;
   font-size:16px;
+  border:none;
+  border-radius:10px;
+  background:#ff6b81;
+  color:white;
+  cursor:pointer;
+}
+button:hover{
+  background:#ff4c61;
 }
 </style>
 </head>
@@ -58,10 +69,14 @@ button{
 <body>
 
 <div class="book">
-  <div class="page" id="page1" style="z-index:4"><img src="images/page1.jpg"></div>
-  <div class="page" id="page2" style="z-index:3"><img src="images/page2.jpg"></div>
-  <div class="page" id="page3" style="z-index:2"><img src="images/page3.jpg"></div>
-  <div class="page" id="page4" style="z-index:1"><img src="images/page4.jpg"></div>
+  <div class="page" id="page1" style="z-index:8"><img src="images/page1.jpg"></div>
+  <div class="page" id="page2" style="z-index:7"><img src="images/page2.jpg"></div>
+  <div class="page" id="page3" style="z-index:6"><img src="images/page3.jpg"></div>
+  <div class="page" id="page4" style="z-index:5"><img src="images/page4.jpg"></div>
+  <div class="page" id="page5" style="z-index:4"><img src="images/page5.jpg"></div>
+  <div class="page" id="page6" style="z-index:3"><img src="images/page6.jpg"></div>
+  <div class="page" id="page7" style="z-index:2"><img src="images/page7.jpg"></div>
+  <div class="page" id="page8" style="z-index:1"><img src="images/page8.jpg"></div>
 </div>
 
 <div class="controls">
@@ -73,14 +88,14 @@ button{
 let current = 1;
 
 function update(){
-  for(let i=1;i<=4;i++){
+  for(let i=1;i<=8;i++){
     document.getElementById("page"+i).style.transform =
       i < current ? "rotateY(-180deg)" : "rotateY(0deg)";
   }
 }
 
 function next(){
-  if(current < 4){
+  if(current < 8){
     current++;
     update();
   }
@@ -96,3 +111,4 @@ function prev(){
 
 </body>
 </html>
+
